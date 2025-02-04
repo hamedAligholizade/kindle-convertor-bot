@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Start the Python FastAPI service in the background
 python src/bot_service.py &

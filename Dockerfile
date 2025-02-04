@@ -18,14 +18,17 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY package*.json ./
 RUN npm install
 
+# Copy the start script first and set permissions
+COPY start.sh .
+RUN chmod +x start.sh
+
 # Copy the rest of the application
 COPY . .
 
+# Ensure the script is still executable after copying all files
+RUN chmod +x start.sh
+
 # Expose ports for both services
 EXPOSE 3000 8000
-
-# Start both services using a shell script
-COPY start.sh .
-RUN chmod +x start.sh
 
 CMD ["./start.sh"] 
